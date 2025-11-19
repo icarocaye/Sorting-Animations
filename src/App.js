@@ -15,7 +15,7 @@ function Bar({ value, state, width }) {
 
   let backgroundColor = "aqua";
   if (state === "comparing") backgroundColor = "orange";
-  if (state === "swapping") backgroundColor = "crimson";
+  if (state === "swapping") backgroundColor = "red";
   if (state === "sorted") backgroundColor = "limegreen";
 
   return (
@@ -32,9 +32,10 @@ function BarContainer({ array, activeIndices, swappingIndices, sortedIndices }) 
     <div style={{height: "25vh", width: "15vw", margin: "3%", display: "flex", gap: `min(1%, ${larguraIndividual})`, alignItems: "flex-end", justifyContent: "center" }}>
       {array.map((value, idx) => {
         let estado = "default";
+        //essa ordem de prioridade dos ifs é importante
         if (sortedIndices.has(idx)) estado = "sorted";
-        else if (activeIndices.has(idx)) estado = "comparing";
         else if (swappingIndices.has(idx)) estado = "swapping";
+        else if (activeIndices.has(idx)) estado = "comparing";
         return <Bar key={idx} value={value} state={estado} width={larguraIndividual}/>
     })}
     </div>
@@ -83,7 +84,7 @@ export default function App() {
           setArray([...arr]); // atualiza visual após swap
           swappedThisTime = true;
 
-          await sleep(Math.max(30, speed)); // pausa para ver a troca
+          await sleep(speed); // pausa para ver a troca
           setSwappingIndices(new Set()); // limpa o highlight do swap
         }
         // limpar highlight da comparação
