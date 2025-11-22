@@ -1,50 +1,13 @@
 import './App.css';
-import { useEffect, useState } from "react";
+import { useState } from 'react';
+import BubbleSortVisualizer from './components/BubbleSortVisualizer';
 
-/* utilitário sleep */
-const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
-
-function Bar({ value, state, width }) {
-  const baseStyle = {
-    height: `${value * 100}%`,
-    width: width,
-    flexShrink: 0,
-    display: "inline-block",
-    alignSelf: "flexend",
-  }
-
-  let backgroundColor = "aqua";
-  if (state === "comparing") backgroundColor = "orange";
-  if (state === "swapping") backgroundColor = "red";
-  if (state === "sorted") backgroundColor = "limegreen";
-
-  return (
-    <div
-      style={{ ...baseStyle, backgroundColor }}
-    />
-  );
-}
-
-function BarContainer({ array, activeIndices, swappingIndices, sortedIndices }) {
-  const larguraIndividual = `clamp(1px, ${100 / array.length}%, 100px)`;
-
-  return (
-    <div style={{height: "25vh", width: "15vw", margin: "3%", display: "flex", gap: `min(1%, ${larguraIndividual})`, alignItems: "flex-end", justifyContent: "center" }}>
-      {array.map((value, idx) => {
-        let estado = "default";
-        //essa ordem de prioridade dos ifs é importante
-        if (sortedIndices.has(idx)) estado = "sorted";
-        else if (swappingIndices.has(idx)) estado = "swapping";
-        else if (activeIndices.has(idx)) estado = "comparing";
-        return <Bar key={idx} value={value} state={estado} width={larguraIndividual}/>
-    })}
-    </div>
-  );
-}
+/* utilitário sleep
+const sleep = (ms) => new Promise((res) => setTimeout(res, ms)); */
 
 export default function App() {
-  const [array, setArray] = useState([]);
-  const [isSorting, setIsSorting] = useState(false);
+  const [speed, setSpeed] = useState(20); //delay entre swaps em ms
+  /*const [array, setArray] = useState([]);
   const [activeIndices, setActiveIndices] = useState(new Set());
   const [swappingIndices, setSwappingIndices] = useState(new Set());
   const [sortedIndices, setSortedIndices] = useState(new Set());
@@ -136,6 +99,28 @@ export default function App() {
       </div>
 
       <BarContainer array={array} activeIndices={activeIndices} swappingIndices={swappingIndices} sortedIndices={sortedIndices}/>
+    </div>
+  );*/
+
+  return (
+    <div className='container'>
+      <h1>Visualizador de Algoritmos de Ordenação</h1>
+
+      <div className='container'>
+        <BubbleSortVisualizer speed={speed}/>
+      </div>
+
+      <label style={{ display: "flex", alignItems: "center", gap: "8px", marginLeft: "1rem" }}>
+          Velocidade:
+          <input
+            type="range"
+            min="1"
+            max="800"
+            value={speed}
+            onChange={(e) => setSpeed(Number(e.target.value))}
+          />
+          <span>{speed} ms</span>
+      </label>
     </div>
   );
 }
