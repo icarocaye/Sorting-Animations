@@ -1,5 +1,6 @@
 export function useMergeSort(array, setArray, setActive, setSwap, setSorted) {
   return async function mergeSort(speed = 100, onFinish = null) {
+    const sleep = (ms) => new Promise(res => setTimeout(res, ms));
     const arr = [...array];
 
     async function merge(l, m, r) {
@@ -11,7 +12,7 @@ export function useMergeSort(array, setArray, setActive, setSwap, setSorted) {
       while (i < left.length && j < right.length) {
         // marca os elementos ativos
         setActive(new Set([k]));
-        await new Promise(res => setTimeout(res, speed));
+        await sleep(speed);
 
         if (left[i] <= right[j]) {
           setSwap(new Set([k]));
@@ -24,7 +25,7 @@ export function useMergeSort(array, setArray, setActive, setSwap, setSorted) {
         }
 
         setArray([...arr]);
-        await new Promise(res => setTimeout(res, speed));
+        await sleep(speed);
         setSwap(new Set());
         k++;
       }
@@ -32,13 +33,13 @@ export function useMergeSort(array, setArray, setActive, setSwap, setSorted) {
       // copia o restante da esquerda
       while (i < left.length) {
         setActive(new Set([k]));
-        await new Promise(res => setTimeout(res, speed));
+        await sleep(speed);
 
         setSwap(new Set([k]));
         arr[k] = left[i];
         setArray([...arr]);
 
-        await new Promise(res => setTimeout(res, speed));
+        await sleep(speed);
         setSwap(new Set());
 
         i++;
@@ -48,13 +49,13 @@ export function useMergeSort(array, setArray, setActive, setSwap, setSorted) {
       // copia o restante da direita
       while (j < right.length) {
         setActive(new Set([k]));
-        await new Promise(res => setTimeout(res, speed));
+        await sleep(speed);
 
         setSwap(new Set([k]));
         arr[k] = right[j];
         setArray([...arr]);
 
-        await new Promise(res => setTimeout(res, speed));
+        await sleep(speed);
         setSwap(new Set());
 
         j++;

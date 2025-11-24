@@ -72,7 +72,7 @@ export default function App() {
         </div>
       </div>
 
-      <label style={{ display: "flex", alignItems: "center", gap: "8px", marginLeft: "1rem" }}>
+      <label style={{ display: "flex", alignItems: "center", gap: "8px", marginLeft: "1rem", marginTop: "2%" }}>
           Velocidade:
           <input
             type="range"

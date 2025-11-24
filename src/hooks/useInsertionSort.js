@@ -1,6 +1,7 @@
 export function useInsertionSort(array, setArray, setActive, setSwap, setSorted) {
   return async function insertionSort(speed = 100, onFinish = null) {
     
+    const sleep = (ms) => new Promise(res => setTimeout(res, speed)) //multiplicamos as pausas do Insertion Sort por 5 para deixar mais didático na apresentação (deixar mais evidente a diferença de tempo entre os algoritmos)
     const arr = [...array];
     const sorted = new Set();
 
@@ -10,12 +11,12 @@ export function useInsertionSort(array, setArray, setActive, setSwap, setSorted)
 
       // marca elemento atual como "swapping" (o key)
       setSwap(new Set([i]));
-      await new Promise(res => setTimeout(res, speed));
+      await sleep(speed);
 
       while (j >= 0 && arr[j] > key) {
         // marca comparação
         setActive(new Set([j, j+1]));
-        await new Promise(res => setTimeout(res, speed));
+        await sleep(speed);
 
         arr[j + 1] = arr[j];
         setArray([...arr]);
@@ -35,7 +36,7 @@ export function useInsertionSort(array, setArray, setActive, setSwap, setSorted)
       sorted.add(i);
       setSorted(new Set(sorted));
 
-      await new Promise(res => setTimeout(res, speed));
+      await sleep(speed);
     }
 
     // todo array agora está ordenado

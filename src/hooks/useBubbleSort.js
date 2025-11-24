@@ -1,6 +1,6 @@
 export function useBubbleSort(array, setArray, setActive, setSwap, setSorted) {
   return async function bubbleSort(speed = 100, onFinish = null) {
-
+    const sleep = (ms) => new Promise(res => setTimeout(res, ms));
     const arr = [...array];
     const size = arr.length;
     const sorted = new Set();
@@ -10,7 +10,7 @@ export function useBubbleSort(array, setArray, setActive, setSwap, setSorted) {
 
       for (let j = 0; j < i; j++) {
         setActive(new Set([j, j + 1]));
-        await new Promise(res => setTimeout(res, speed));
+        await sleep(speed);
 
         if (arr[j] > arr[j + 1]) {
           setSwap(new Set([j, j + 1]));
@@ -18,7 +18,7 @@ export function useBubbleSort(array, setArray, setActive, setSwap, setSorted) {
           setArray([...arr]);
           swapped = true;
 
-          await new Promise(res => setTimeout(res, speed));
+          await sleep(speed);
           setSwap(new Set());
         }
 

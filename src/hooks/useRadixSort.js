@@ -6,7 +6,7 @@ export function useRadixSort(array, setArray, setActive, setSwap, setSorted) {
       return;
     }
 
-    const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
     // --- construir chaves inteiras ---
     function decimalPlaces(x) {
@@ -41,14 +41,14 @@ export function useRadixSort(array, setArray, setActive, setSwap, setSorted) {
       // distribuir para os buckets
       for (let i = 0; i < n; i++) {
         setActive(new Set([i])); // destaque de leitura
-        await wait(speed);
+        await sleep(speed);
 
         const digit = Math.floor(arr[i].key / exp) % 10;
 
         // --- MICRO PAUSA AQUI ---
         // cada vez que um elemento é colocado no bucket
         buckets[digit].push(arr[i]);
-        await wait(speed); // nova pausa de animação
+        await sleep(speed); // nova pausa de animação
 
         setActive(new Set());
       }
@@ -61,7 +61,7 @@ export function useRadixSort(array, setArray, setActive, setSwap, setSorted) {
           arr[idx] = item;
 
           setArray(arr.map((o) => o.val));
-          await wait(speed);
+          await sleep(speed);
 
           setSwap(new Set());
           idx++;
