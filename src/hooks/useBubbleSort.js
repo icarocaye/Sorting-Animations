@@ -1,6 +1,5 @@
-export function useBubbleSort(array, setArray, setActive, setSwap, setSorted, setIsSorting) {
-  return async function bubbleSort(speed = 100) {
-    setIsSorting(true);
+export function useBubbleSort(array, setArray, setActive, setSwap, setSorted) {
+  return async function bubbleSort(speed = 100, onFinish = null) {
 
     const arr = [...array];
     const size = arr.length;
@@ -39,6 +38,7 @@ export function useBubbleSort(array, setArray, setActive, setSwap, setSorted, se
     sorted.add(0);
     setSorted(new Set(sorted));
 
-    setIsSorting(false);
+    //callback para avisar o componente que acabou
+    if (onFinish) onFinish();
   };
 }

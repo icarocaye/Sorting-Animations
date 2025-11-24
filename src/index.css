@@ -12,6 +12,7 @@ code {
     monospace;
 }
 
+
 #app {
   display: flex;
   flex-direction: column;
@@ -19,9 +20,12 @@ code {
 }
 
 .container {
+  width: 30vw;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-right: 20px;
+  margin-left: 20px;
 }
 
 button {
@@ -29,6 +33,7 @@ button {
   padding: 3%;
   border: 0;
   border-radius: 30px;
+  margin: 3%;
 }
 
 button:hover {

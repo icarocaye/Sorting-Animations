@@ -1,40 +1,39 @@
 import { useState, useEffect } from "react";
 import BarContainer from "./BarContainer";
-import { useBubbleSort } from "../hooks/useBubbleSort";
+import { useMergeSort } from "../hooks/useMergeSort";
 
-export default function BubbleSortVisualizer({ baseArray, speed, globalSortSignal, onFinish }) {
+export default function MergeSortVisualizer({ baseArray, speed, globalSortSignal, onFinish }) {
   const [array, setArray] = useState([]);
   const [active, setActive] = useState(new Set());
   const [swap, setSwap] = useState(new Set());
   const [sorted, setSorted] = useState(new Set());
 
-  const bubbleSort = useBubbleSort(
+  const mergeSort = useMergeSort(
     array,
     setArray,
     setActive,
     setSwap,
-    setSorted,
+    setSorted
   );
-
-  useEffect(() => { //atualiza quando clicar em "Novo Array"
-  if (baseArray.length > 0) {
-    setArray([...baseArray]);
-    setActive(new Set());
-    setSwap(new Set());
-    setSorted(new Set()); 
-  }
-}, [baseArray]);
-
 
   useEffect(() => {
     if (baseArray.length > 0) {
-      bubbleSort(speed, onFinish);  // começar a ordenação
+      setArray([...baseArray]);
+      setActive(new Set());
+      setSwap(new Set());
+      setSorted(new Set());
+    }
+  }, [baseArray]);
+
+  useEffect(() => {
+    if (baseArray.length > 0) {
+      mergeSort(speed, onFinish);
     }
   }, [globalSortSignal]);
 
   return (
     <div className="container">
-      <h2>Bubble Sort</h2>
+      <h2>Merge Sort</h2>
 
       <BarContainer
         array={array}
@@ -42,7 +41,6 @@ export default function BubbleSortVisualizer({ baseArray, speed, globalSortSigna
         swappingIndices={swap}
         sortedIndices={sorted}
       />
-
     </div>
   );
 }

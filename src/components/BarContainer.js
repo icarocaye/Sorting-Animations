@@ -4,34 +4,64 @@ function Bar({ value, state, width }) {
     width: width,
     flexShrink: 0,
     display: "inline-block",
-    alignSelf: "flexend",
-  }
+    alignSelf: "flex-end",
+  };
 
   let backgroundColor = "aqua";
-  if (state === "comparing") backgroundColor = "orange";
-  if (state === "swapping") backgroundColor = "red";
-  if (state === "sorted") backgroundColor = "limegreen";
 
-  return (
-    <div
-      style={{ ...baseStyle, backgroundColor }}
-    />
-  );
+  if (state === "sorted") backgroundColor = "limegreen";
+  else if (state === "swapping") backgroundColor = "crimson";
+  else if (state === "pivot") backgroundColor = "black";
+  else if (state === "left") backgroundColor = "darkblue";
+  else if (state === "right") backgroundColor = "hotpink";
+  else if (state === "comparing") backgroundColor = "orange";
+
+  return <div style={{ ...baseStyle, backgroundColor }} />;
 }
 
-export default function BarContainer({ array, activeIndices, swappingIndices, sortedIndices }) {
+export default function BarContainer({
+  array,
+  activeIndices = new Set(),      // bubble sort
+  swappingIndices = new Set(),    // ambos
+  sortedIndices = new Set(),      // ambos
+  pivotIndex = null,              // quicksort
+  leftIndex = null,               // quicksort
+  rightIndex = null,              // quicksort
+}) {
   const larguraIndividual = `clamp(1px, ${100 / array.length}%, 100px)`;
 
   return (
-    <div style={{height: "25vh", width: "15vw", margin: "3%", display: "flex", gap: `min(1%, ${larguraIndividual})`, alignItems: "flex-end", justifyContent: "center" }}>
+    <div
+      style={{
+        height: "25vh",
+        width: "15vw",
+        margin: "3%",
+        display: "flex",
+        gap: `min(1%, ${larguraIndividual})`,
+        alignItems: "flex-end",
+        justifyContent: "center",
+      }}
+    >
       {array.map((value, idx) => {
         let estado = "default";
-        //essa ordem de prioridade dos ifs é importante
-        if (sortedIndices.has(idx)) estado = "sorted";
+
+        // ORDEM DE PRIORIDADE — MUITO IMPORTANTE!
+        if (activeIndices.has(idx)) estado = "comparing";
+        else if (sortedIndices.has(idx)) estado = "sorted";
         else if (swappingIndices.has(idx)) estado = "swapping";
-        else if (activeIndices.has(idx)) estado = "comparing";
-        return <Bar key={idx} value={value} state={estado} width={larguraIndividual}/>
-    })}
+        else if (idx === pivotIndex) estado = "pivot";
+        else if (idx === leftIndex) estado = "left";
+        else if (idx === rightIndex) estado = "right";
+
+        return (
+          <Bar
+            key={idx}
+            value={value}
+            state={estado}
+            width={larguraIndividual}
+          />
+        );
+      })}
     </div>
   );
 }
