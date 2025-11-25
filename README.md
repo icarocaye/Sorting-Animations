@@ -1,30 +1,37 @@
-# Getting Started with Create React App
+# Animações de Algoritmos de Ordenação
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este projeto foi desenvolvido com React para ser exibido na feira ICMC de Portas Abertas de 2025 e consiste em um aplicativo web que mostra, por meio de animações sobre arrays genéricos, o funcionamento de alguns dos algoritmos de ordenação mais conhecidos. O programa permite ao usuário gerar arrays aleatórios ou gerar arrays invertidos (para testar o pior caso de ordenação), bem como regular a velocidade da simulação na parte inferior da página e disparar o processo de ordenação. Vale ressaltar que, para dar foco na comparação entre os algoritmos, todos eles recebem arrays iguais todas vez que o usuário os gera e começam a ordenar ao mesmo tempo.
 
-## Available Scripts
+Os algoritmos incluídos na aplicação foram decididos com o intuito em variar as complexidades presentes. Com base nisso, são eles:
+- Complexidade O(n²): Bubble Sort, Insertion Sort
+- Complexidade O(n): Radix Sort
+- Complexidade O(n log n): Quick Sort, Merge Sort, Heap Sort
 
-In the project directory, you can run:
+## Como executar
+
+No diretório deste projeto, você pode rodar:
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Executa o app em modo de desenvolvimento.\
+Abra [http://localhost:3000](http://localhost:3000) para visualizá-lo no navegador.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+A página recarrega quando você faz mudanças.\
+Você também pode ver erros no console.
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Inicia o test runner no modo interativo de vigia.\
+Veja a seção [running tests](https://facebook.github.io/create-react-app/docs/running-tests) para mais informações.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Constrói a versão final do app na pasta `build`.\
+Agrupa corretamente o React no modo de produção e otimiza a build para melhor performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+A build é minimizada e os nomes dos arquivos incluem hashes.\
+O app fica pronto para ser entregue!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Veja a seção [deployment](https://facebook.github.io/create-react-app/docs/deployment) para mais informações.
+
+OBS: no repositório, não inclui uma versão finalizada do projeto com `npm build`.
